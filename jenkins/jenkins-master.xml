@@ -1,0 +1,218 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<project>
+  <actions/>
+  <description></description>
+  <keepDependencies>false</keepDependencies>
+  <properties>
+    <hudson.security.AuthorizationMatrixProperty>
+      <permission>hudson.model.Item.Configure:authenticated</permission>
+      <permission>hudson.scm.SCM.Tag:authenticated</permission>
+      <permission>com.synopsys.arc.jenkins.plugins.ownership.OwnershipPlugin.Jobs:authenticated</permission>
+      <permission>hudson.model.Item.ExtendedRead:authenticated</permission>
+      <permission>hudson.model.Item.Read:authenticated</permission>
+    </hudson.security.AuthorizationMatrixProperty>
+      <com.synopsys.arc.jenkins.plugins.ownership.jobs.JobOwnerJobProperty plugin="ownership@0.6">
+      <ownership>
+          <ownershipEnabled>true</ownershipEnabled>
+          <primaryOwnerId>authenticated</primaryOwnerId>
+          <coownersIds class="sorted-set"/>
+      </ownership>
+      </com.synopsys.arc.jenkins.plugins.ownership.jobs.JobOwnerJobProperty>
+    <hudson.plugins.buildblocker.BuildBlockerProperty plugin="build-blocker-plugin@1.7.3">
+      <useBuildBlocker>false</useBuildBlocker>
+      <blockLevel>GLOBAL</blockLevel>
+      <scanQueueFor>DISABLED</scanQueueFor>
+      <blockingJobs></blockingJobs>
+    </hudson.plugins.buildblocker.BuildBlockerProperty>
+    <com.expedia.hudson.plugins.buildstats.StatsNotifierProperty plugin="build-stats-jenkins@4.1.5">
+      <relationshipKey class="string"></relationshipKey>
+      <testReportXMLs class="string"></testReportXMLs>
+      <jacocoTestReportXml class="string"></jacocoTestReportXml>
+      <to class="string"></to>
+      <cc class="string"></cc>
+      <from class="string"></from>
+      <currentTag class="string"></currentTag>
+      <newTag class="string"></newTag>
+      <jobName class="string">my-second-test-app-em-master</jobName>
+      <stageName class="string"></stageName>
+      <currentStage class="string"></currentStage>
+      <pipelineName class="string"></pipelineName>
+      <pipelineURL class="string"></pipelineURL>
+      <env class="string"></env>
+      <keywords class="list"/>
+      <debugOn class="boolean">false</debugOn>
+      <isTestNg class="boolean">false</isTestNg>
+      <sendTests class="boolean">false</sendTests>
+      <emailJUNITTestResults class="boolean">false</emailJUNITTestResults>
+      <sendBuildStats class="boolean">false</sendBuildStats>
+    </com.expedia.hudson.plugins.buildstats.StatsNotifierProperty>
+    <com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty plugin="build-failure-analyzer@1.18.1">
+      <doNotScan>false</doNotScan>
+    </com.sonyericsson.jenkins.plugins.bfa.model.ScannerJobProperty>
+    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.26.1">
+      <projectUrl>https://github.expedia.biz/Brand-Expedia/my-second-test-app-em/</projectUrl>
+      <displayName></displayName>
+    </com.coravy.hudson.plugins.github.GithubProjectProperty>
+    <com.synopsys.arc.jenkins.plugins.ownership.jobs.JobOwnerJobProperty plugin="ownership@0.9.1">
+      <ownership>
+        <ownershipEnabled>true</ownershipEnabled>
+        <primaryOwnerId>s-ewebuildprop</primaryOwnerId>
+        <coownersIds class="sorted-set"/>
+      </ownership>
+    </com.synopsys.arc.jenkins.plugins.ownership.jobs.JobOwnerJobProperty>
+    <org.jenkinsci.plugins.mavenrepocleaner.MavenRepoCleanerProperty plugin="maven-repo-cleaner@1.2">
+      <notOnThisProject>false</notOnThisProject>
+    </org.jenkinsci.plugins.mavenrepocleaner.MavenRepoCleanerProperty>
+    <com.chikli.hudson.plugin.naginator.NaginatorOptOutProperty plugin="naginator@1.17.2">
+      <optOut>false</optOut>
+    </com.chikli.hudson.plugin.naginator.NaginatorOptOutProperty>
+    <com.sonyericsson.rebuild.RebuildSettings plugin="rebuild@1.25">
+      <autoRebuild>false</autoRebuild>
+      <rebuildDisabled>false</rebuildDisabled>
+    </com.sonyericsson.rebuild.RebuildSettings>
+    <de.pellepelster.jenkins.walldisplay.WallDisplayJobProperty plugin="jenkinswalldisplay@0.6.33"/>
+    <org.jvnet.hudson.plugins.shelveproject.ShelveProjectProperty plugin="shelve-project-plugin@1.5"/>
+  </properties>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@3.1.0">
+    <configVersion>2</configVersion>
+    <userRemoteConfigs>
+      <hudson.plugins.git.UserRemoteConfig>
+        <url>git@github.expedia.biz:Brand-Expedia/my-second-test-app-em.git</url>
+      </hudson.plugins.git.UserRemoteConfig>
+    </userRemoteConfigs>
+    <branches>
+      <hudson.plugins.git.BranchSpec>
+        <name>*/master</name>
+      </hudson.plugins.git.BranchSpec>
+    </branches>
+    <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
+    <browser class="hudson.plugins.git.browser.GithubWeb">
+      <url></url>
+    </browser>
+    <submoduleCfg class="list"/>
+    <extensions>
+      <hudson.plugins.git.extensions.impl.UserExclusion>
+        <excludedUsers>ewe-jenkins
+          ewbldsup
+          jenkins
+          *jenkins*</excludedUsers>
+      </hudson.plugins.git.extensions.impl.UserExclusion>
+    </extensions>
+  </scm>
+  <assignedNode>amazon&amp;&amp;linux&amp;&amp;builder</assignedNode>
+  <canRoam>false</canRoam>
+  <disabled>false</disabled>
+  <blockBuildWhenDownstreamBuilding>false</blockBuildWhenDownstreamBuilding>
+  <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
+  <jdk>jdk-8u192</jdk>
+  <triggers>
+    <com.cloudbees.jenkins.GitHubPushTrigger plugin="github@1.26.1">
+      <spec></spec>
+    </com.cloudbees.jenkins.GitHubPushTrigger>
+  </triggers>
+  <concurrentBuild>false</concurrentBuild>
+  <builders>
+    <hudson.tasks.Shell>
+      <command>
+##Build
+
+rm -rf $HOME/miniconda
+wget http://repo.continuum.io/miniconda/Miniconda3-4.6.14-Linux-x86_64.sh -O miniconda.sh
+chmod 755 miniconda.sh
+./miniconda.sh -b -p $HOME/miniconda
+export PATH=&quot;$HOME/miniconda/bin:$PATH&quot;
+
+chmod 755 zipenv.sh
+
+make all
+##Test
+
+source activate my-second-test-app-em
+nose2 --with-coverage --coverage-report=&apos;xml&apos;
+
+
+##Package
+make build-libs
+</command>
+    </hudson.tasks.Shell>
+    <hudson.tasks.Shell>
+      <command>#Copy to S3
+s3cmd --verbose put dist/my-second-test-app-em.zip s3://bexg-datasci-bigdata/builds/all/my-second-test-app-em/$GIT_COMMIT/
+
+</command>
+    </hudson.tasks.Shell>
+  </builders>
+  <publishers>
+    <hudson.plugins.cobertura.CoberturaPublisher plugin="cobertura@1.13">
+      <coberturaReportFile>**/coverage.xml</coberturaReportFile>
+      <onlyStable>false</onlyStable>
+      <failUnhealthy>false</failUnhealthy>
+      <failUnstable>false</failUnstable>
+      <autoUpdateHealth>false</autoUpdateHealth>
+      <autoUpdateStability>false</autoUpdateStability>
+      <zoomCoverageChart>false</zoomCoverageChart>
+      <maxNumberOfBuilds>0</maxNumberOfBuilds>
+      <failNoReports>true</failNoReports>
+      <lineCoverageTargets>80, 0, 0</lineCoverageTargets>
+      <methodCoverageTargets>80, 0, 0</methodCoverageTargets>
+      <conditionalCoverageTargets>70, 0, 0</conditionalCoverageTargets>
+      <healthyTarget>
+        <targets class="enum-map" enum-type="hudson.plugins.cobertura.targets.CoverageMetric">
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>METHOD</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>8000000</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>LINE</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>8000000</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>CONDITIONAL</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>7000000</int>
+          </entry>
+        </targets>
+      </healthyTarget>
+      <unhealthyTarget>
+        <targets class="enum-map" enum-type="hudson.plugins.cobertura.targets.CoverageMetric">
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>METHOD</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>LINE</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>CONDITIONAL</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+        </targets>
+      </unhealthyTarget>
+      <failingTarget>
+        <targets class="enum-map" enum-type="hudson.plugins.cobertura.targets.CoverageMetric">
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>METHOD</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>LINE</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+          <entry>
+            <hudson.plugins.cobertura.targets.CoverageMetric>CONDITIONAL</hudson.plugins.cobertura.targets.CoverageMetric>
+            <int>0</int>
+          </entry>
+        </targets>
+      </failingTarget>
+      <sourceEncoding>ASCII</sourceEncoding>
+      <enableNewApi>false</enableNewApi>
+    </hudson.plugins.cobertura.CoberturaPublisher>
+  </publishers>
+  <buildWrappers>
+    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.32">
+      <deleteDirs>false</deleteDirs>
+      <cleanupParameter></cleanupParameter>
+      <externalDelete></externalDelete>
+    </hudson.plugins.ws__cleanup.PreBuildCleanup>
+  </buildWrappers>
+</project>

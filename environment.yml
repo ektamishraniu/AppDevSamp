@@ -1,0 +1,11 @@
+name: my-second-test-app-em
+channels:
+  - http://ewe-conda-channel.s3-website.us-west-2.amazonaws.com/meta/channel/
+dependencies:
+  - python=3.5.4
+  - numpy
+  - pip
+  - pip:
+    - setuptools==38.5.1
+    - pyspark==2.4.0
+    - nose2
